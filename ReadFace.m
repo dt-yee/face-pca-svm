@@ -16,19 +16,20 @@ imgcol = 92;
 
 
 realclass = zeros(n_persons*5,1);
-f_matrix = zeros(n_person*5, imgrow*imgcol);
+f_matrix = zeros(n_persons*5, imgrow*imgcol);
 
 for i = 1:n_persons
     imgpath = strcat('D:\face\att_faces\s',num2str(i),'\');
-    curpath = imgpath;
+    dirpath = imgpath;
     for j = 1:5
         if flag == 0
-            curpath = strcat(curpath, num2str(j),'.pgm')
+            curpath = strcat(dirpath, num2str(j),'.pgm')
         else
-            curpath = strcat(curpath, num2str(j+5),'.pgm')
+            curpath = strcat(dirpath, num2str(j+5),'.pgm');
+            realclass((i-1)*5+j) = i;
         end
         
-        realclass((i-1)*5+j) = i;
+        
         img = imread(curpath);
         f_matrix((i-1)*5 + j,:) = img(:);
     end
